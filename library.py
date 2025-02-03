@@ -17,7 +17,7 @@ def air_heat_capacity(volume_m3, temp_c):
     :param temp_c: 温度 [℃]
     :return: 熱容量 [J/K]
     """
-    return volume_m3 * SPECIFIC_HEAT_AIR * air_density(temp_c) * 1000
+    return volume_m3 * const.SPECIFIC_HEAT_AIR * air_density(temp_c) * 1000
 
 # 絶対温度 [K]
 def absolute_temperature(temp_c):
@@ -62,7 +62,7 @@ def saturation_vapor_pressure(temp_c):
         + 5.02808 * np.log10(t_dash)
         - 1.3816e-7 * (np.power(10, 11.344 * (1 - 1 / t_dash)) - 1)
         + 8.1328e-3 * (np.power(10, -3.4919 * (t_dash - 1)) - 1)
-        + np.log10(STANDARD_ATMOSPHERIC_PRESSURE / 100)
+        + np.log10(const.STANDARD_ATMOSPHERIC_PRESSURE / 100)
     )
     return np.power(10, log_ps) * 100
 
@@ -77,7 +77,7 @@ def vapor_pressure(temp_c, humidity):
     return humidity / 100 * saturation_vapor_pressure(temp_c)
 
 #湿球温度を用いた蒸気圧 e_w を計算
-def vapor_pressure_wet_bulb(T_w, T_d, P=STANDARD_ATMOSPHERIC_PRESSURE):
+def vapor_pressure_wet_bulb(T_w, T_d, P=const.STANDARD_ATMOSPHERIC_PRESSURE):
     A = 0.00066  # 湿球係数 (hPa/Pa)
     e_s_Tw = saturation_vapor_pressure(T_w)
     e_w = e_s_Tw - A * P * (T_d - T_w)
@@ -92,7 +92,7 @@ def absolute_humidity(temp_c, humidity):
     :return: 絶対湿度 [kg/kg]
     """
     e = vapor_pressure(temp_c, humidity)
-    return 0.622 * (e / (STANDARD_ATMOSPHERIC_PRESSURE - e))
+    return 0.622 * (e / (const.STANDARD_ATMOSPHERIC_PRESSURE - e))
 
 # エンタルピ計算
 def sensible_enthalpy(temp_c):
@@ -110,7 +110,7 @@ def latent_enthalpy(temp_c, humidity):
     :param humidity: 相対湿度 [%]
     :return: 潜熱エンタルピ [kJ/kg]
     """
-    return absolute_humidity(temp_c, humidity) * (LATENT_HEAT_VAPORIZATION + SPECIFIC_HEAT_WATER_VAPOR * temp_c)
+    return absolute_humidity(temp_c, humidity) * (const.LATENT_HEAT_VAPORIZATION + const.SPECIFIC_HEAT_WATER_VAPOR * temp_c)
 
 def total_enthalpy(temp_c, humidity):
     """
