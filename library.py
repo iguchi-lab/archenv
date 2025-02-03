@@ -74,6 +74,13 @@ def vapor_pressure(temp_c, humidity):
     """
     return humidity / 100 * saturation_vapor_pressure(temp_c)
 
+#湿球温度を用いた蒸気圧 e_w を計算
+def vapor_pressure_wet_bulb(T_w, T_d, P=STANDARD_ATMOSPHERIC_PRESSURE):
+    A = 0.00066  # 湿球係数 (hPa/Pa)
+    e_s_Tw = saturation_vapor_pressure(T_w)
+    e_w = e_s_Tw - A * P * (T_d - T_w)
+    return e_w
+    
 # 絶対湿度 [kg/kg]
 def absolute_humidity(temp_c, humidity):
     """
