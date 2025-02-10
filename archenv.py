@@ -1,3 +1,4 @@
+import numpy as np
 import archenv.const as const
 
 # 空気密度 [kg/m³]
