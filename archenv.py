@@ -140,13 +140,3 @@ def total_enthalpy(temp_c, humidity):
     :return: 全熱エンタルピ [kJ/kg(DA)]
     """
     return sensible_enthalpy(temp_c) + latent_enthalpy(temp_c, humidity)
-
-JIS_T_C_IN = 27.0                                                       # JIS測定時の室内温度 [℃]
-JIS_T_C_EX = 35.0                                                       # JIS測定時の室外温度 [℃]
-JIS_X_C_IN = absolute_humidity_from_e(vapor_pressure_wet_bulb(19, 27))  # JIS測定時の室内絶対湿度 [kg/kg']  湿球温度は19℃
-JIS_X_C_EX = absolute_humidity_from_e(vapor_pressure_wet_bulb(24, 35))  # JIS測定時の室外絶対湿度 [kg/kg']  湿球温度は24℃
-
-JIS_T_H_IN = 20.0                                                       # JIS測定時の室内温度 [℃]
-JIS_T_H_EX =  7.0                                                       # JIS測定時の室外温度 [℃]
-JIS_X_H_IN = absolute_humidity_from_e(vapor_pressure_wet_bulb(15, 20))  # JIS測定時の室内絶対湿度 [kg/kg']  湿球温度は15℃（最高温度）
-JIS_X_H_EX = absolute_humidity_from_e(vapor_pressure_wet_bulb( 6,  7))  # JIS測定時の室外絶対湿度 [kg/kg']  湿球温度は6℃
