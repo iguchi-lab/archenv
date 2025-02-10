@@ -13,3 +13,5 @@ DENSITY_DRY_AIR               = 1.225    # 乾燥空気の密度 [kg/m³]（標�
 
 SOLAR_CONSTANT                = 1365     # 太陽定数 [W/m²]
 STEFAN_BOLTZMANN_CONSTANT     = 4.88e-8  # ステファン・ボルツマン定数
+
+KELVIN_OFFSET                 = 273.15   # ケルビン変換のオフセット
