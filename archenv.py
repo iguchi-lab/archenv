@@ -8,7 +8,7 @@ def air_density(temp_c):
     :param temp_c: 温度 [℃]
     :return: 密度 [kg/m³]
     """
-    return 353.25 / (temp_c + 273.15)
+    return const.STANDARD_ATMOSPHERIC_PRESSURE / (const.GAS_CONSTANT_DRY_AIR * absolute_temperature(Td))
 
 # 空気の熱容量 [J/K]
 def air_heat_capacity(volume_m3, temp_c):
