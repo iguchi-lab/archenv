@@ -1,6 +1,6 @@
 import numpy as np
 import archenv.const as const
-
+import archenv.JIS as JIS
 
 # 空気密度 [kg/m³]
 def air_density(temp_c):
