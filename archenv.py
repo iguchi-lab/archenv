@@ -20,6 +20,15 @@ def air_heat_capacity(volume_m3, temp_c):
     """
     return volume_m3 * const.SPECIFIC_HEAT_AIR * air_density(temp_c) * 1000
 
+# 湿り空気の比熱 [J/K]
+def air_specific_heat(x):
+    """
+    重量絶対湿度[kg/kg(DA)]の湿り空気の比熱を計算する。
+    :param x: 重量絶対湿度 [kg/kg(DA])
+    :return: 湿り空気の比熱 [kJ/kg]
+    """
+    return const.SPECIFIC_HEAT_AIR + const.SPECIFIC_HEAT_WATER_VAPOR * x 
+
 # 絶対温度 [K]
 def absolute_temperature(temp_c):
     """
@@ -27,7 +36,7 @@ def absolute_temperature(temp_c):
     :param temp_c: 温度 [℃]
     :return: 絶対温度 [K]
     """
-    return temp_c + 273.15
+    return temp_c + const.KELVIN_OFFSET
 
 # 飽和水蒸気圧計算用の補助関数
 def T_dash(temp_c):
