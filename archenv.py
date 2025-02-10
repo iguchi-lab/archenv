@@ -1,15 +1,6 @@
 import numpy as np
 import archenv.const as const
 
-JIS_T_C_IN = 27.0                                                       # JIS測定時の室内温度 [℃]
-JIS_T_C_EX = 35.0                                                       # JIS測定時の室外温度 [℃]
-JIS_X_C_IN = absolute_humidity_from_e(vapor_pressure_wet_bulb(19, 27))  # JIS測定時の室内絶対湿度 [kg/kg']  湿球温度は19℃
-JIS_X_C_EX = absolute_humidity_from_e(vapor_pressure_wet_bulb(24, 35))  # JIS測定時の室外絶対湿度 [kg/kg']  湿球温度は24℃
-
-JIS_T_H_IN = 20.0                                                       # JIS測定時の室内温度 [℃]
-JIS_T_H_EX =  7.0                                                       # JIS測定時の室外温度 [℃]
-JIS_X_H_IN = absolute_humidity_from_e(vapor_pressure_wet_bulb(15, 20))  # JIS測定時の室内絶対湿度 [kg/kg']  湿球温度は15℃（最高温度）
-JIS_X_H_EX = absolute_humidity_from_e(vapor_pressure_wet_bulb( 6,  7))  # JIS測定時の室外絶対湿度 [kg/kg']  湿球温度は6℃
 
 # 空気密度 [kg/m³]
 def air_density(temp_c):
@@ -128,16 +119,16 @@ def sensible_enthalpy(temp_c):
     """
     顕熱エンタルピ [kJ/kg] を計算する。
     :param temp_c: 温度 [℃]
-    :return: 顕熱エンタルピ [kJ/kg]
+    :return: 顕熱エンタルピ [kJ/kg(DA)]
     """
-    return SPECIFIC_HEAT_AIR * temp_c
+    return const.SPECIFIC_HEAT_AIR * temp_c
 
 def latent_enthalpy(temp_c, humidity):
     """
     潜熱エンタルピ [kJ/kg] を計算する。
     :param temp_c: 温度 [℃]
     :param humidity: 相対湿度 [%]
-    :return: 潜熱エンタルピ [kJ/kg]
+    :return: 潜熱エンタルピ [kJ/kg(DA)]
     """
     return absolute_humidity(temp_c, humidity) * (const.LATENT_HEAT_VAPORIZATION + const.SPECIFIC_HEAT_WATER_VAPOR * temp_c)
 
@@ -146,6 +137,16 @@ def total_enthalpy(temp_c, humidity):
     全熱エンタルピ [kJ/kg] を計算する。
     :param temp_c: 温度 [℃]
     :param humidity: 相対湿度 [%]
-    :return: 全熱エンタルピ [kJ/kg]
+    :return: 全熱エンタルピ [kJ/kg(DA)]
     """
     return sensible_enthalpy(temp_c) + latent_enthalpy(temp_c, humidity)
+
+JIS_T_C_IN = 27.0                                                       # JIS測定時の室内温度 [℃]
+JIS_T_C_EX = 35.0                                                       # JIS測定時の室外温度 [℃]
+JIS_X_C_IN = absolute_humidity_from_e(vapor_pressure_wet_bulb(19, 27))  # JIS測定時の室内絶対湿度 [kg/kg']  湿球温度は19℃
+JIS_X_C_EX = absolute_humidity_from_e(vapor_pressure_wet_bulb(24, 35))  # JIS測定時の室外絶対湿度 [kg/kg']  湿球温度は24℃
+
+JIS_T_H_IN = 20.0                                                       # JIS測定時の室内温度 [℃]
+JIS_T_H_EX =  7.0                                                       # JIS測定時の室外温度 [℃]
+JIS_X_H_IN = absolute_humidity_from_e(vapor_pressure_wet_bulb(15, 20))  # JIS測定時の室内絶対湿度 [kg/kg']  湿球温度は15℃（最高温度）
+JIS_X_H_EX = absolute_humidity_from_e(vapor_pressure_wet_bulb( 6,  7))  # JIS測定時の室外絶対湿度 [kg/kg']  湿球温度は6℃
