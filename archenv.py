@@ -92,7 +92,16 @@ def vapor_pressure_wet_bulb(T_w, T_d, P=const.STANDARD_ATMOSPHERIC_PRESSURE):
     e_s_Tw = saturation_vapor_pressure(T_w)
     e_w = e_s_Tw - A * P * (T_d - T_w)
     return e_w
-    
+
+# 絶対湿度 [kg/kg]
+def absolute_humidity_from_e(e):
+    """
+    水蒸気分圧[Pa]から重量絶対湿度[kg/kg(DA)]を計算する。
+    :param e: 水蒸気分圧[Pa]
+    :return: 重量絶対湿度[kg/kg(DA)]
+    """
+    return 0.622 * (e / (const.STANDARD_ATMOSPHERIC_PRESSURE - e))
+
 # 絶対湿度 [kg/kg]
 def absolute_humidity(temp_c, humidity):
     """
@@ -102,7 +111,7 @@ def absolute_humidity(temp_c, humidity):
     :return: 絶対湿度 [kg/kg]
     """
     e = vapor_pressure(temp_c, humidity)
-    return 0.622 * (e / (const.STANDARD_ATMOSPHERIC_PRESSURE - e))
+    return absolute_humidity_from_e(e)
 
 # エンタルピ計算
 def sensible_enthalpy(temp_c):
