@@ -122,20 +122,26 @@ def sensible_enthalpy(temp_c):
     """
     return const.SPECIFIC_HEAT_AIR * temp_c
 
-def latent_enthalpy(temp_c, humidity):
+def latent_enthalpy(temp_c, humidity=None, x=None):
     """
     潜熱エンタルピ [kJ/kg] を計算する。
     :param temp_c: 温度 [℃]
     :param humidity: 相対湿度 [%]
     :return: 潜熱エンタルピ [kJ/kg(DA)]
     """
-    return absolute_humidity(temp_c, humidity) * (const.LATENT_HEAT_VAPORIZATION + const.SPECIFIC_HEAT_WATER_VAPOR * temp_c)
+    if humidity is not None:
+        return absolute_humidity(temp_c, humidity) * (const.LATENT_HEAT_VAPORIZATION + const.SPECIFIC_HEAT_WATER_VAPOR * temp_c)
+    elif x is not None:
+        return x * (const.LATENT_HEAT_VAPORIZATION + const.SPECIFIC_HEAT_WATER_VAPOR * temp_c)
 
-def total_enthalpy(temp_c, humidity):
+def total_enthalpy(temp_c, humidity=None, x=None):
     """
     全熱エンタルピ [kJ/kg] を計算する。
     :param temp_c: 温度 [℃]
     :param humidity: 相対湿度 [%]
     :return: 全熱エンタルピ [kJ/kg(DA)]
     """
-    return sensible_enthalpy(temp_c) + latent_enthalpy(temp_c, humidity)
+    if humidity is not None:
+        return sensible_enthalpy(temp_c) + latent_enthalpy(temp_c, humidity=humidity)
+    elif x is not None:
+        return sensible_enthalpy(temp_c) + latent_enthalpy(temp_c, x=x)
