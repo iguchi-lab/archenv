@@ -29,6 +29,15 @@ def air_specific_heat(x):
     """
     return const.SPECIFIC_HEAT_AIR + const.SPECIFIC_HEAT_WATER_VAPOR * x 
 
+# 水の蒸発潜熱
+def vapor_latantheat(temp_c):
+    """
+    温度から水の蒸発潜熱を計算する。
+    :param temp: 温度 [℃]
+    :return: 蒸発潜熱
+    """
+    return const.LATENT_HEAT_VAPORIZATION - 2.3668 * temp_c
+
 # 絶対温度 [K]
 def absolute_temperature(temp_c):
     """
@@ -129,6 +138,7 @@ def latent_enthalpy(temp_c, humidity=None, x=None):
     :param humidity: 相対湿度 [%]
     :return: 潜熱エンタルピ [kJ/kg(DA)]
     """
+    #蒸発潜熱の温度依存性は考慮せず0℃の蒸発潜熱で計算（教科書＜建築環境工学＞と同様だが、詳細を調べ要検討）
     if humidity is not None:
         return absolute_humidity(temp_c, humidity) * (const.LATENT_HEAT_VAPORIZATION + const.SPECIFIC_HEAT_WATER_VAPOR * temp_c)
     elif x is not None:
