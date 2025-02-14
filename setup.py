@@ -7,8 +7,7 @@ setup(
     install_requires=[
         "requests",
         "numpy",
-        "pandas",
-        "archenv",  # ここではパッケージ名のみ
+        "pandas"
     ],
     dependency_links=[
         "git+https://github.com/iguchi-lab/archenv.git#egg=archenv",
