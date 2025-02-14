@@ -1,4 +1,5 @@
 import numpy as np
+import const as const
 
 # 空気密度 [kg/m³]
 def air_density(temp_c):
