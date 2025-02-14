@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 
 setup(
-    name="your_package_name",  # 自分のパッケージ名
+    name="archenv",  # 自分のパッケージ名
     version="0.1.0",  # バージョン番号
     packages=find_packages(),  # パッケージを自動検出
     install_requires=[
