@@ -1,4 +1,4 @@
-from . import library as ae
+import library as ae
 
 T_C_IN = 27.0                                                             # JIS測定時の室内温度 [℃]
 T_C_EX = 35.0                                                             # JIS測定時の室外温度 [℃]
