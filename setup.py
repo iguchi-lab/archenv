@@ -1,16 +1,13 @@
 from setuptools import setup, find_packages
 
 setup(
-    name="ac_model",
+    name="archenv",
     version="0.1.0",
-    packages=find_packages(include=["ac_model", "ac_model.*"]),
+    packages=find_packages(include=["archenv", "archenv.*"]),
     install_requires=[
         "requests",
         "numpy",
         "pandas"
-    ],
-    dependency_links=[
-        "git+https://github.com/iguchi-lab/archenv.git#egg=archenv",
     ],
     include_package_data=True,
 )
